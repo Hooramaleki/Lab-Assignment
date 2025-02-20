@@ -28,12 +28,17 @@ public class player : MonoBehaviour
         //we assign this so we can see it in the game and read the values
         inputVector = new Vector3(inputX, inputY, 0);
 
+        //we ue debug.log to show the output of vector in consule
+        Debug.Log(inputVector.magnitude);
+
         //to know how many seconds the last frame took? for example it takes 0.066... for 60fps
         float dt = Time.deltaTime;
 
         //if W and D is held at the same time the inputvector will be (1,1,0) for a velocity of (speed,speed,0)
-
         transform.position = transform.position + inputVector *speed *dt;
+    
+
+
     }
 
 }
