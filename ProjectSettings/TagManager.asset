@@ -38,11 +38,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: background
     uniqueID: 4283449409
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: second
     uniqueID: 2181814847
