@@ -8,10 +8,12 @@ public class big_brown_rock : MonoBehaviour
     //we define a speed just to place it in an upcoming vector in our code in order to make it easier to understand
     public float speed =-1;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
