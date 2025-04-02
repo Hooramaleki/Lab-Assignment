@@ -98,3 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  speedDecrease: 0.6
+  minSpeed: 3

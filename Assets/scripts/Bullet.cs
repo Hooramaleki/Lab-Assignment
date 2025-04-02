@@ -6,19 +6,21 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
 
+    public float speedDecrease;
+
+    public float minSpeed;
+
   
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += speed * Time.deltaTime * transform.up;
+
+        speed -= speedDecrease * Time.deltaTime;
+        if (speed < minSpeed )
+            speed = minSpeed;
 
         if (Mathf.Abs(transform.position.x) > 15)
         {

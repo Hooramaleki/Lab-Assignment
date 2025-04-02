@@ -38,6 +38,10 @@ public class player : MonoBehaviour
 
     public Vector3 inputVector = Vector3.zero;
 
+    //for animations
+    public GameObject downward;
+    public GameObject upward;
+
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +57,14 @@ public class player : MonoBehaviour
         }
     }
 
+    //here I added a part in inspector for animation
+    [Header ("animation stuff")]
+    public Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator> (); 
+    }
 
     // Update is called once per frame
     void Update()
@@ -140,6 +152,42 @@ public class player : MonoBehaviour
         //if W and D is held at the same time the inputvector will be (1,1,0) for a velocity of (speed,speed,0)
         transform.position = transform.position + inputVector * speed * dt;
 
+
+        //for animation
+
+        if (inputVector.x > 0)
+        {
+            animator.Play("Backwards");
+        }
+
+        else if (inputVector.x < 0)
+        {
+            animator.Play ("Forward");
+        }
+        else
+        {
+            animator.Play ( "Idle");
+        }
+
+        if (inputVector.y > 0)
+        {
+            animator.Play ( "Upward");
+
+            upward.SetActive(true);
+            downward.SetActive(false);
+        }
+        else if(inputVector.y < 0)
+        {
+            animator.Play ( "Downward");
+
+            upward.SetActive(false);
+            downward.SetActive(true);
+        }
+        else
+        {
+            upward.SetActive(false);
+            downward.SetActive(false);
+        }
     }
 
 
