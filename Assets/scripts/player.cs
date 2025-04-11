@@ -13,6 +13,17 @@ public class player : MonoBehaviour
     public float spreadAngle = 30;
     public float doubleDistance = 0.3f;
 
+    //audiosource is contains the audioclip - shooting audios
+    public AudioSource shootSFXsource = null;
+    public AudioClip shootSFXdefaut = null;
+    public AudioClip shootSFXspread = null;
+    public AudioClip shootSFXdouble = null;
+    public AudioClip shootSFXrapid = null;
+
+    //audio for movement
+    public AudioSource movementSound = null;
+    public AudioClip MovementClip = null;
+
 
     //player speed
     public float speed = 2f;
@@ -69,6 +80,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Switching between different shooting modes when pressing E.
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -153,8 +165,11 @@ public class player : MonoBehaviour
         transform.position = transform.position + inputVector * speed * dt;
 
 
-        //for animation
+        //mathf.clamp limits the magnitude between 0 & 1 and if no input; volume goes mute
+        movementSound.volume = Mathf.Clamp01(inputVector.magnitude);
 
+
+        //for animation
         if (inputVector.x > 0)
         {
             animator.Play("Backwards");
@@ -197,10 +212,21 @@ public class player : MonoBehaviour
         ///Spawn 1 bullet at the offset position
         Instantiate(playershootPrefab, transform.position + shootOffset, transform.rotation);
         timeUntilReloaded = 1 / fireRate; // Calculates how many seconds between shots
+
+        //sound
+        shootSFXsource.Play();
+
+        //to change the sound
+        shootSFXsource.clip = shootSFXdefaut;
+
     }
 
     void SpreadShootingBehaviour()
     {
+        //sound
+        shootSFXsource.Play();
+        //to change the sound
+        shootSFXsource.clip = shootSFXspread;
 
         // Converts rotation from quaternion to 3 angles in degerees around x,y and z
         Vector3 eulerRotation = transform.rotation.eulerAngles;
@@ -223,6 +249,11 @@ public class player : MonoBehaviour
 
     void RapidShootingBehaviour()
     {
+        //sound
+        shootSFXsource.Play();
+        //to change the sound
+        shootSFXsource.clip = shootSFXrapid;
+
         //Spawn 1 bullet with faster fire rate
         Instantiate(playershootPrefab, transform.position + shootOffset, transform.rotation);
         timeUntilReloaded = 1 / rapidFireRate; // Calculates how many seconds between shots
@@ -230,6 +261,11 @@ public class player : MonoBehaviour
 
     void DoubleShootingBehaviour()
     {
+        //sound
+        shootSFXsource.Play();
+        //to change the sound
+        shootSFXsource.clip = shootSFXdouble;
+
         //Spawn 2 bullets, one above and one below
         Instantiate(playershootPrefab, transform.position + shootOffset + Vector3.up * doubleDistance, transform.rotation);
         Instantiate(playershootPrefab, transform.position + shootOffset - Vector3.up * doubleDistance, transform.rotation);
